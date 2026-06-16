@@ -1,0 +1,43 @@
+{
+  "$schema": "https://devopsmigration.io/schema/configuration.schema.json",
+  "Serilog": {
+    "MinimumLevel": "Information"
+  },
+  "MigrationTools": {
+    "Version": "16.3",
+    "Endpoints": {
+      "Source": {
+        "EndpointType": "AzureDevOpsEndpoint",
+        "AuthenticationMode": "AccessToken",
+        "AccessToken": "${AZDO_SOURCE_PAT}",
+        "Organisation": "${AZDO_BASE_URL}/${AZDO_SOURCE_ORG}/",
+        "Project": "${AZDO_SOURCE_PROJECT}",
+        "ReflectedWorkItemIdField": "Custom.ReflectedWorkItemId"
+      },
+      "Target": {
+        "EndpointType": "AzureDevOpsEndpoint",
+        "AuthenticationMode": "AccessToken",
+        "AccessToken": "${AZDO_TARGET_PAT}",
+        "Organisation": "${AZDO_BASE_URL}/${AZDO_TARGET_ORG}/",
+        "Project": "${AZDO_TARGET_PROJECT}",
+        "ReflectedWorkItemIdField": "Custom.ReflectedWorkItemId"
+      }
+    },
+    "Processors": [
+      {
+        "ProcessorType": "AzureDevOpsPipelineProcessor",
+        "Enabled": true,
+        "MigrateBuildPipelines": true,
+        "MigrateReleasePipelines": true,
+        "MigrateServiceConnections": false,
+        "MigrateVariableGroups": true,
+        "MigrateTaskGroups": true,
+        "BuildPipelines": [],
+        "ReleasePipelines": [],
+        "RepositoryNameMaps": {},
+        "SourceName": "Source",
+        "TargetName": "Target"
+      }
+    ]
+  }
+}

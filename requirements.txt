@@ -1,0 +1,5 @@
+# The migration script uses only Python standard library modules.
+# These entries keep pip tooling available in fresh environments.
+pip>=24.0
+setuptools>=70.0
+wheel>=0.43
