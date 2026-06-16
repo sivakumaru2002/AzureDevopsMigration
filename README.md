@@ -133,6 +133,25 @@ Official permissions guidance:
 
 - https://devopsmigration.io/docs/setup/permissions/
 
+## Azure DevOps Prerequisites
+
+Before running the migration, make sure the target Azure DevOps project is ready for the same pipeline dependencies used in source.
+
+- Marketplace tasks or custom build tasks used by source pipelines must already be installed in the target organization.
+- Pipeline extensions available in source should also be installed in target before migration.
+- Agent pools, queue names, and any referenced infrastructure should exist in target if your pipelines depend on them.
+- Variable groups or other shared pipeline assets should be reviewed in target before the live run.
+
+### Service Connections
+
+Source pipelines often reference service connections such as Azure subscriptions, Docker registries, GitHub connections, or other external endpoints.
+
+- Equivalent service connections should exist in the target project before validating migrated pipelines.
+- The connection names used in target should match what the migrated pipelines expect, or the pipelines must be updated after migration.
+- Secrets and credentials for those service connections must be configured again in target.
+
+Important: the current [configuration.json](d:/auxiliary-codes/azure/configuration.json) has `MigrateServiceConnections` set to `false`, so service connections are not migrated by the current setup. Treat them as a manual prerequisite unless you intentionally change that processor setting.
+
 ## How The Config Works
 
 `configuration.json` is a template file. It contains placeholders such as:
@@ -254,6 +273,8 @@ The current `configuration.json` enables:
 - `AzureDevOpsPipelineProcessor`
 
 With the current file, that means the DevOpsMigration step is configured for pipeline-related migration settings such as build pipelines, release pipelines, variable groups, and task groups.
+
+Service connection migration is currently disabled in the pipeline processor configuration, so target service connections must be prepared separately.
 
 If you later enable additional processors, update the permissions and migration expectations accordingly.
 

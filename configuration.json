@@ -27,11 +27,11 @@
       {
         "ProcessorType": "AzureDevOpsPipelineProcessor",
         "Enabled": true,
+        "MigrateTaskGroups": true,
         "MigrateBuildPipelines": true,
         "MigrateReleasePipelines": true,
-        "MigrateServiceConnections": false,
+        "MigrateServiceConnections": true,
         "MigrateVariableGroups": true,
-        "MigrateTaskGroups": true,
         "BuildPipelines": [],
         "ReleasePipelines": [],
         "RepositoryNameMaps": {},
