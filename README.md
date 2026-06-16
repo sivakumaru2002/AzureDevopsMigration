@@ -292,4 +292,3 @@ If `run_all_migrations.sh` does not start correctly on Windows, run it from Git 
 - Treat `.env` as sensitive because it contains PATs.
 - Do not commit real PATs to source control.
 - Rotate PATs if they were ever stored in plain JSON or shared insecurely.
-# AzureDevopsMigration
